@@ -1,3 +1,4 @@
 from enviarEmail.envioEmail import Envio
-Envio('basenovosexcluidos.csv')
-Envio('basenovosregistros.csv')
+emails = ['leandro.silva@unitfour.com.br','paulo.melo@unitfour.com.br','vinicius.spigariol@unitfour.com.br']
+for email in emails:
+    Envio('basenovosregistros.csv', email)
