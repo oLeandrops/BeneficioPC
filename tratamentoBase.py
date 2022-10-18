@@ -62,7 +62,14 @@ def tratarbase(arquivo_old,arquivo_new):
             , 'NOME_REPRESENTANTE_LEGAL_x', 'BENEFICIO_CONCEDIDO_JUDICIALMENTE_x'
             , 'VALOR_PARCELA_x']].loc[tabelaMerge['MES_COMPETENCIA_y'].isnull()]
     BaseNovosExcluidos.to_csv('basenovosexcluidos.csv')
+    #Verificar Alteração de Representante
+    tabelaMerge = df1.merge(df2, on='NUMERO_BENEFICIO')
+    tabelaalter = tabelaMerge[['NUMERO_BENEFICIO','MES_REFERENCIA_x','NOME_BENEFICIARIO_x','NOME_REPRESENTANTE_LEGAL_x','MES_REFERENCIA_y','NOME_BENEFICIARIO_y','NOME_REPRESENTANTE_LEGAL_y']]
+    del tabelaMerge
+    beneficiosAlterados = tabelaalter.query('NOME_REPRESENTANTE_LEGAL_x != NOME_REPRESENTANTE_LEGAL_y' ,engine='python').sort_values('NUMERO_BENEFICIO')
+    beneficiosAlterados.to_csv('BaseBeneficiosAlterados.csv')
+
     print('Arquivo Criado Com sucesso!')
 
 if __name__ == '__main__':
-    tratarbase('202203_BPC.csv','202204_BPC.csv')
+    tratarbase('202204_BPC.csv','202205_BPC.csv')

@@ -11,10 +11,10 @@ def Envio(arquivoenviar,destino):
     mes = date.today()
     mes = mes - timedelta(days=30)
     mes = mes.strftime('%B de %Y')
-    host = 'smtp.gmail.com'
+    host = 'smtp.office365.com'
     port = '587'
-    login = 'pythonunit4@gmail.com'
-    password = '***********'
+    login = 'rpa_unit4@outlook.com'
+    password = 'RPA123456'
     #conexão
     server = smtplib.SMTP(host, port)
     server.ehlo()
@@ -43,5 +43,9 @@ def Envio(arquivoenviar,destino):
     print('Arquivo enviado com sucesso')
 
 if __name__ == '__main__':
-    Envio('main.py')
-
+    emails = ['leandro.silva@unitfour.com.br',
+          'paulo.melo@unitfour.com.br',
+          'vinicius.spigariol@unitfour.com.br']
+    for email in emails:
+        Envio('basenovosexcluidos.csv', email)
+        Envio('basenovosregistros.csv', email)
